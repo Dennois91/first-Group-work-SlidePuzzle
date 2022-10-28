@@ -42,6 +42,10 @@ public class Engine {
 	}
 
 
+	private boolean canMove(Square square, Position positionOfEmptyValue) {
+		var possibleMoves = getPossibleMoves(positionOfEmptyValue);
+		return possibleMoves.containsKey(square.getCurrent());
+	}
 
 	private HashMap<Position, Position> getPossibleMoves(Position positionOfEmptyValue) {
 		var adjacentPositions = getAdjacentPositions(positionOfEmptyValue);

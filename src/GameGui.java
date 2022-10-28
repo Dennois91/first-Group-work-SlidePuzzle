@@ -65,11 +65,12 @@ public class GameGui extends JFrame {
         buttonList.add(nr14);
         buttonList.add(nr15);
         buttonList.add(blank);
-        southPanel.add(newGame);
-        southPanel.add(cheatGame);
         for (Object button : buttonList){
             centerPanel.add((Component) button);
         }
+
+        southPanel.add(newGame);
+        southPanel.add(cheatGame);
 
         pack();
         setLocationRelativeTo(null);

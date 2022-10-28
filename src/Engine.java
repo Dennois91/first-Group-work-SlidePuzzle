@@ -22,6 +22,7 @@ public class Engine {
 
 	public void moveButtonValue(JButtonPlus buttonId) {
 		int id = buttonId.getIndex();
+		System.out.println(id);
 
 		// Check if button is next to 16
 

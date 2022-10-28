@@ -71,7 +71,7 @@ public class GameGui extends JFrame {
 
         for (JButton button : buttonList) {
             centerPanel.add(button);
-            button.addActionListener(l -> (i) -> engine.moveButtonValue(i));
+            button.addActionListener((i) -> engine.moveButtonValue(i));
         }
 
         southPanel.add(newGame);

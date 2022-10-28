@@ -1,25 +1,25 @@
 import javax.swing.*;
 
 public class Square extends JButton {
-	private Position current;
+	private Position currentPosition;
 
-	public Position getCurrent() {
-		return current;
+	public Position getCurrentPosition() {
+		return currentPosition;
 	}
 
-	public void setCurrent(Position current) {
-		this.current = current;
+	public void setCurrentPosition(Position currentPosition) {
+		this.currentPosition = currentPosition;
 	}
 
-	private final Position home;
+	private final Position homePosition;
 
-	public Position getHome() {
-		return home;
+	public Position getHomePosition() {
+		return homePosition;
 	}
 
-	public Square(Position current, Position home) {
-		this.current = current;
-		this.home = home;
+	public Square(Position currentPosition, Position homePosition) {
+		this.currentPosition = currentPosition;
+		this.homePosition = homePosition;
 	}
 
 

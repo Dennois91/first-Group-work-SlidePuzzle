@@ -44,7 +44,7 @@ public class Engine {
 
 	private boolean canMove(Square square, Position positionOfEmptyValue) {
 		var possibleMoves = getPossibleMoves(positionOfEmptyValue);
-		return possibleMoves.containsKey(square.getCurrent());
+		return possibleMoves.containsKey(square.getCurrentPosition());
 	}
 
 	private HashMap<Position, Position> getPossibleMoves(Position positionOfEmptyValue) {

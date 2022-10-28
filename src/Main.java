@@ -5,5 +5,6 @@ public class Main {
     }
     private void run() {
         // Do stuff
+
     }
 }

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class GameGui extends JFrame {
     JButton nr14 = new JButton("14");
     JButton nr15 = new JButton("15");
     JButton blank = new JButton(" ");
-    List<Object> buttonList = new ArrayList<>();
+    List<JButton> buttonList = new ArrayList<>();
 
 
     //Manipulate game buttons
@@ -37,17 +39,20 @@ public class GameGui extends JFrame {
 
     //Game labels
     JLabel movesCounter = new JLabel(String.valueOf(0));
+    JLabel movesCounterLabel = new JLabel("Nr of moves: ");
 
     public GameGui() {
 
         setLayout(new BorderLayout());
-        add(northPanel,BorderLayout.NORTH);
-        add(centerPanel,BorderLayout.CENTER);
-        add(southPanel,BorderLayout.SOUTH);
+        add(northPanel, BorderLayout.NORTH);
+        add(centerPanel, BorderLayout.CENTER);
+        add(southPanel, BorderLayout.SOUTH);
 
+        northPanel.add(movesCounterLabel);
         northPanel.add(movesCounter);
+        northPanel.setBackground(Color.YELLOW);
 
-        centerPanel.setLayout(new GridLayout(4,4));
+        centerPanel.setLayout(new GridLayout(4, 4));
 
         buttonList.add(nr1);
         buttonList.add(nr2);
@@ -65,12 +70,15 @@ public class GameGui extends JFrame {
         buttonList.add(nr14);
         buttonList.add(nr15);
         buttonList.add(blank);
-        for (Object button : buttonList){
-            centerPanel.add((Component) button);
+
+        for (JButton button : buttonList) {
+            centerPanel.add(button);
+            button.addActionListener(l -> (i) -> engine.moveButtonValue(i));
         }
 
         southPanel.add(newGame);
         southPanel.add(cheatGame);
+        southPanel.setBackground(Color.YELLOW);
 
         pack();
         setLocationRelativeTo(null);

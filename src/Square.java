@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public class Square extends JButton {
+	private final Position homePosition;
 	private Position currentPosition;
 
 	public Position getCurrentPosition() {
@@ -11,16 +12,12 @@ public class Square extends JButton {
 		this.currentPosition = currentPosition;
 	}
 
-	private final Position homePosition;
-
-	public Position getHomePosition() {
-		return homePosition;
-	}
-
 	public Square(Position currentPosition, Position homePosition) {
 		this.currentPosition = currentPosition;
 		this.homePosition = homePosition;
 	}
 
-
+	public boolean isHome() {
+		return currentPosition.equals(homePosition);
+	}
 }

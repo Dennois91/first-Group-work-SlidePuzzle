@@ -2,9 +2,11 @@ import java.util.*;
 
 public class Engine {
 	private Square emptySquare;
+	private HashMap<Position, Boolean> squaresInCorrectPosition;
 
-	public Engine(Square emptySquare) {
+	public Engine(Square emptySquare, HashMap<Position, Boolean> squaresInCorrectPosition) {
 		this.emptySquare = emptySquare;
+		this.squaresInCorrectPosition = squaresInCorrectPosition;
 	}
 
 	public void move(Square square) {
@@ -13,7 +15,7 @@ public class Engine {
 			emptySquare = square;
 		}
 	}
-
+	
 	private void switchSquareTexts(Square a, Square b) {
 		var tempTextHolder = a.getText();
 		a.setText(b.getText());

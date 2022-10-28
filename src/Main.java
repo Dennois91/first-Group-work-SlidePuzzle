@@ -4,6 +4,7 @@ public class Main {
         new Main().run();
     }
     private void run() {
+        GameGui gui = new GameGui();
         // Do stuff
 
     }

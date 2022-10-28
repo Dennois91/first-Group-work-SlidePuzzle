@@ -1,8 +1,12 @@
 public class Main {
-    public static void main(String[] args) {
+
+    public Main() {
         System.out.println("Hello world!");
 
+    }
 
-        //halolo
+    public static void main(String[] args) {
+        Main main = new Main();
+
     }
 }

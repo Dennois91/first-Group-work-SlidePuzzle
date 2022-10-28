@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameGui extends JFrame {
 
@@ -26,6 +28,8 @@ public class GameGui extends JFrame {
     JButton nr14 = new JButton("14");
     JButton nr15 = new JButton("15");
     JButton blank = new JButton(" ");
+    List<JButton> buttonList = new ArrayList<>();
+
 
     //Manipulate game buttons
     JButton newGame = new JButton("New game");
@@ -33,36 +37,46 @@ public class GameGui extends JFrame {
 
     //Game labels
     JLabel movesCounter = new JLabel(String.valueOf(0));
+    JLabel messageLabel = new JLabel("Nr of moves: ");
 
-    public GameGui() throws HeadlessException {
+    public GameGui() {
 
         setLayout(new BorderLayout());
-        add(northPanel,BorderLayout.NORTH);
-        add(centerPanel,BorderLayout.CENTER);
-        add(southPanel,BorderLayout.SOUTH);
+        add(northPanel, BorderLayout.NORTH);
+        add(centerPanel, BorderLayout.CENTER);
+        add(southPanel, BorderLayout.SOUTH);
 
+        northPanel.add(messageLabel);
         northPanel.add(movesCounter);
+        northPanel.setBackground(Color.YELLOW);
 
-        centerPanel.setLayout(new GridLayout(4,4));
-        centerPanel.add(nr1);
-        centerPanel.add(nr2);
-        centerPanel.add(nr3);
-        centerPanel.add(nr4);
-        centerPanel.add(nr5);
-        centerPanel.add(nr6);
-        centerPanel.add(nr7);
-        centerPanel.add(nr8);
-        centerPanel.add(nr9);
-        centerPanel.add(nr10);
-        centerPanel.add(nr11);
-        centerPanel.add(nr12);
-        centerPanel.add(nr13);
-        centerPanel.add(nr14);
-        centerPanel.add(nr15);
-        centerPanel.add(blank);
+        centerPanel.setLayout(new GridLayout(4, 4));
+
+        buttonList.add(nr1);
+        buttonList.add(nr2);
+        buttonList.add(nr3);
+        buttonList.add(nr4);
+        buttonList.add(nr5);
+        buttonList.add(nr6);
+        buttonList.add(nr7);
+        buttonList.add(nr8);
+        buttonList.add(nr9);
+        buttonList.add(nr10);
+        buttonList.add(nr11);
+        buttonList.add(nr12);
+        buttonList.add(nr13);
+        buttonList.add(nr14);
+        buttonList.add(nr15);
+        buttonList.add(blank);
+
+        for (JButton button : buttonList) {
+            centerPanel.add(button);
+            button.addActionListener((i) -> engine.moveButtonValue(i));
+        }
 
         southPanel.add(newGame);
         southPanel.add(cheatGame);
+        southPanel.setBackground(Color.YELLOW);
 
         pack();
         setLocationRelativeTo(null);

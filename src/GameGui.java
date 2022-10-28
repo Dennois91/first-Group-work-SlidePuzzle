@@ -39,7 +39,7 @@ public class GameGui extends JFrame {
 
     //Game labels
     JLabel movesCounter = new JLabel(String.valueOf(0));
-    JLabel movesCounterLabel = new JLabel("Nr of moves: ");
+    JLabel messageLabel = new JLabel("Nr of moves: ");
 
     public GameGui() {
 
@@ -48,7 +48,7 @@ public class GameGui extends JFrame {
         add(centerPanel, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
 
-        northPanel.add(movesCounterLabel);
+        northPanel.add(messageLabel);
         northPanel.add(movesCounter);
         northPanel.setBackground(Color.YELLOW);
 

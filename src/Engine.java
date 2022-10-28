@@ -20,14 +20,10 @@ public class Engine {
 		return new Engine(initialButtonValues, buttons);
 	}
 
-	public void moveButtonValue(int buttonId) {
+	public void moveButtonValue(JButtonPlus buttonId) {
+		int id = buttonId.getIndex();
 
 		// Check if button is next to 16
-		if (isMoveable(buttonId)) {
-			// TODO move value
-		} else {
-			// TODO not move
-		}
 
 	}
 
@@ -64,4 +60,5 @@ public class Engine {
 		}
 		return positionToReturn;
 	}
+
 }

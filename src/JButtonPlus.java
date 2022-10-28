@@ -8,4 +8,8 @@ public class JButtonPlus extends JButton{
         super(text);
         this.index = index;
     }
+
+    public int getIndex() {
+        return index;
+    }
 }

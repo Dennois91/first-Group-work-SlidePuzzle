@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,22 +12,22 @@ public class GameGui extends JFrame {
     JPanel southPanel = new JPanel();
 
     //Game Buttons
-    JButton nr1 = new JButton("1");
-    JButton nr2 = new JButton("2");
-    JButton nr3 = new JButton("3");
-    JButton nr4 = new JButton("4");
-    JButton nr5 = new JButton("5");
-    JButton nr6 = new JButton("6");
-    JButton nr7 = new JButton("7");
-    JButton nr8 = new JButton("8");
-    JButton nr9 = new JButton("9");
-    JButton nr10 = new JButton("10");
-    JButton nr11 = new JButton("11");
-    JButton nr12 = new JButton("12");
-    JButton nr13 = new JButton("13");
-    JButton nr14 = new JButton("14");
-    JButton nr15 = new JButton("15");
-    JButton blank = new JButton(" ");
+    JButton nr1 = new JButtonPlus(1, "2");
+    JButton nr2 = new JButtonPlus(2, "2");
+    JButton nr3 = new JButtonPlus(3, "3");
+    JButton nr4 = new JButtonPlus(4, "4");
+    JButton nr5 = new JButtonPlus(5, "5");
+    JButton nr6 = new JButtonPlus(6, "6");
+    JButton nr7 = new JButtonPlus(7, "7");
+    JButton nr8 = new JButtonPlus(8, "8");
+    JButton nr9 = new JButtonPlus(9, "9");
+    JButton nr10 = new JButtonPlus(10, "10");
+    JButton nr11 = new JButtonPlus(11, "11");
+    JButton nr12 = new JButtonPlus(12, "12");
+    JButton nr13 = new JButtonPlus(13, "13");
+    JButton nr14 = new JButtonPlus(14, "14");
+    JButton nr15 = new JButtonPlus(15, "15");
+    JButton blank = new JButtonPlus(16, " ");
     List<JButton> buttonList;
 
 
@@ -52,11 +53,15 @@ public class GameGui extends JFrame {
         centerPanel.setLayout(new GridLayout(4, 4));
 
         buttonList = bList();
+        Engine engine = Engine.create(bList());
 
+        int temp = 1;
         for (JButton button : buttonList) {
             centerPanel.add(button);
-            int temp =1;
-           // button.addActionListener((i) -> engine.moveButtonValue(temp));
+            int finalTemp = temp;
+            button.addActionListener((i) -> engine.moveButtonValue(finalTemp));
+            temp++;
+
         }
 
         southPanel.add(newGame);
@@ -68,7 +73,8 @@ public class GameGui extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    protected List<JButton> bList(){
+
+    protected List<JButton> bList() {
         List<JButton> buttons = new ArrayList<>();
         buttons.add(nr1);
         buttons.add(nr2);

@@ -6,8 +6,10 @@ public class Main {
 
     private void run() {
 
-      //  Engine engine = Engine.create();
+
         GameGui gui = new GameGui();
+        Engine engine = Engine.create(gui.bList());
+
         // Do stuff
     }
 }

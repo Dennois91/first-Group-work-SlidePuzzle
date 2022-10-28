@@ -1,10 +1,10 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameGui extends JFrame {
+
 
     //Panel layouts
     JPanel northPanel = new JPanel();

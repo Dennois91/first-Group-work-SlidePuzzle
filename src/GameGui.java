@@ -12,7 +12,7 @@ public class GameGui extends JFrame {
     JPanel southPanel = new JPanel();
 
     //Game Buttons
-    JButton nr1 = new JButtonPlus(1, "2");
+    JButton nr1 = new JButtonPlus(1, "1");
     JButton nr2 = new JButtonPlus(2, "2");
     JButton nr3 = new JButtonPlus(3, "3");
     JButton nr4 = new JButtonPlus(4, "4");

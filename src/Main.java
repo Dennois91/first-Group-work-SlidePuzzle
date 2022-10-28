@@ -6,6 +6,5 @@ public class Main {
     private void run() {
         GameGui gui = new GameGui();
         // Do stuff
-
     }
 }

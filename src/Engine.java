@@ -2,20 +2,39 @@ import java.util.*;
 
 public class Engine {
 	private Square emptySquare;
-	private HashMap<Position, Boolean> squaresInCorrectPosition;
+	private final HashMap<Position, Boolean> squaresInHomePosition;
 
-	public Engine(Square emptySquare, HashMap<Position, Boolean> squaresInCorrectPosition) {
+	public Engine(Square emptySquare, HashMap<Position, Boolean> squaresInHomePosition) {
 		this.emptySquare = emptySquare;
-		this.squaresInCorrectPosition = squaresInCorrectPosition;
+		this.squaresInHomePosition = squaresInHomePosition;
 	}
 
 	public void move(Square square) {
 		if (canMove(square)) {
-			switchSquareTexts(square, emptySquare);
-			emptySquare = square;
+			switchSquares(square, emptySquare);
+		}
+		if (gameIsWon()) {
+			// TODO Congratulations
 		}
 	}
-	
+
+	private boolean gameIsWon() {
+		return !squaresInHomePosition.containsValue(false);
+	}
+
+	private void switchSquares(Square a, Square b) {
+		switchSquarePositions(a,b);
+		switchSquareTexts(a,b);
+		emptySquare = a;
+		squaresInHomePosition.put(b.getCurrentPosition(),b.isHome());
+	}
+
+	private void switchSquarePositions(Square a, Square b) {
+		var tempPositionHolder = a.getCurrentPosition();
+		a.setCurrentPosition(b.getCurrentPosition());
+		b.setCurrentPosition(tempPositionHolder);
+	}
+
 	private void switchSquareTexts(Square a, Square b) {
 		var tempTextHolder = a.getText();
 		a.setText(b.getText());

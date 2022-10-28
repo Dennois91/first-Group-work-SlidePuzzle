@@ -1,9 +1,11 @@
+package view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameGui extends JFrame {
+public class View extends JFrame {
 
 
     //Panel layouts
@@ -39,7 +41,7 @@ public class GameGui extends JFrame {
     JLabel movesCounter = new JLabel(String.valueOf(0));
     JLabel messageLabel = new JLabel("Nr of moves: ");
 
-    public GameGui() {
+    public View() {
 
         setLayout(new BorderLayout());
         add(northPanel, BorderLayout.NORTH);
@@ -53,13 +55,13 @@ public class GameGui extends JFrame {
         centerPanel.setLayout(new GridLayout(4, 4));
 
         buttonList = bList();
-        Engine engine = Engine.create(bList());
+        Controller controller = controller.create(bList());
 
         int temp = 1;
         for (JButton button : buttonList) {
             centerPanel.add(button);
             int finalTemp = temp;
-            button.addActionListener((i) -> engine.moveButtonValue((JButtonPlus) button));
+            button.addActionListener((i) -> controller.moveButtonValue((JButtonPlus) button));
             temp++;
         }
 

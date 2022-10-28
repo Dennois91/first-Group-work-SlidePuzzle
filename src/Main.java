@@ -1,3 +1,6 @@
+import controller.Controller;
+import view.View;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,8 +10,8 @@ public class Main {
     private void run() {
 
 
-        GameGui gui = new GameGui();
-        Engine engine = Engine.create(gui.bList());
+        View gui = new View();
+        Controller controller = Controller.create(gui.bList());
 
 
 

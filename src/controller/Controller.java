@@ -1,10 +1,15 @@
+package controller;
+
+import models.Position;
+import models.Square;
+
 import java.util.*;
 
-public class Engine {
+public class Controller {
 	private Square emptySquare;
 	private final HashMap<Position, Boolean> squaresInHomePosition;
 
-	public Engine(Square emptySquare, HashMap<Position, Boolean> squaresInHomePosition) {
+	public Controller(Square emptySquare, HashMap<Position, Boolean> squaresInHomePosition) {
 		this.emptySquare = emptySquare;
 		this.squaresInHomePosition = squaresInHomePosition;
 	}

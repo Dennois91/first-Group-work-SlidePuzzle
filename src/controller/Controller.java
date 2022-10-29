@@ -1,70 +1,44 @@
 package controller;
 
-import models.Position;
+import models.GameProgress;
+import models.GridSize;
 import models.Square;
+import view.View;
 
 import java.util.*;
 
 public class Controller {
 	private Square emptySquare;
-	private final HashMap<Position, Boolean> squaresInHomePosition;
 
-	public Controller(Square emptySquare, HashMap<Position, Boolean> squaresInHomePosition) {
+	private final GameProgress gameProgress = new GameProgress(emptySquare);
+	private final View view;
+	private final GridSize gridSize;
+
+	public Controller(Square emptySquare, GridSize gridSize) {
 		this.emptySquare = emptySquare;
-		this.squaresInHomePosition = squaresInHomePosition;
+		this.gridSize = gridSize;
+		this.view = new View(gridSize);
+	}
+
+	public void initView() {
+
+	}
+
+	public void initController() {
+		List<Square> squares = view.getSquares();
+		squares.forEach(square -> square.addActionListener(e -> move(square)));
+
 	}
 
 	public void move(Square square) {
-		if (canMove(square)) {
-			switchSquares(square, emptySquare);
+		if (square.canMove(emptySquare)) {
+			emptySquare = square.switchSquareData(emptySquare);
+			gameProgress.update(emptySquare);
 		}
-		if (gameIsWon()) {
-			// TODO Congratulations
+		if (gameProgress.isComplete()) {
+			// TODO show congratulations
 		}
 	}
 
-	private boolean gameIsWon() {
-		return !squaresInHomePosition.containsValue(false);
-	}
 
-	private void switchSquares(Square a, Square b) {
-		switchSquarePositions(a,b);
-		switchSquareTexts(a,b);
-		emptySquare = a;
-		squaresInHomePosition.put(b.getCurrentPosition(),b.isHome());
-	}
-
-	private void switchSquarePositions(Square a, Square b) {
-		var tempPositionHolder = a.getCurrentPosition();
-		a.setCurrentPosition(b.getCurrentPosition());
-		b.setCurrentPosition(tempPositionHolder);
-	}
-
-	private void switchSquareTexts(Square a, Square b) {
-		var tempTextHolder = a.getText();
-		a.setText(b.getText());
-		b.setText(tempTextHolder);
-	}
-
-	private boolean canMove(Square square) {
-		var possibleMoves = getPossibleMoves();
-		return possibleMoves.containsKey(square.getCurrentPosition());
-	}
-
-	private HashMap<Position, Position> getPossibleMoves() {
-		var adjacentPositions = getAdjacentPositions(emptySquare.getCurrentPosition());
-		var possibleMoves = new HashMap<Position, Position>();
-		adjacentPositions.forEach((adjacentPosition -> possibleMoves.put(adjacentPosition,
-				emptySquare.getCurrentPosition())));
-		return possibleMoves;
-	}
-
-	private List<Position> getAdjacentPositions(Position positionOfEmptyValue) {
-		List<Position> adjacentPositions = new ArrayList<>();
-		adjacentPositions.add(positionOfEmptyValue.up());
-		adjacentPositions.add(positionOfEmptyValue.down());
-		adjacentPositions.add(positionOfEmptyValue.left());
-		adjacentPositions.add(positionOfEmptyValue.right());
-		return adjacentPositions;
-	}
 }

@@ -17,8 +17,4 @@ public class GridSize {
 		this.columns = columns;
 		this.rows = rows;
 	}
-
-	public int getCapacity() {
-		return columns*rows;
-	}
 }

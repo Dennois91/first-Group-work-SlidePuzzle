@@ -1,44 +1,29 @@
 package controller;
 
-import models.GameProgress;
-import models.GridSize;
-import models.Square;
+import models.*;
 import view.View;
 
-import java.util.*;
-
 public class Controller {
-	private Square emptySquare;
-
-	private final GameProgress gameProgress = new GameProgress(emptySquare);
+	private final ProgressChecker progressChecker = new ProgressChecker();
 	private final View view;
-	private final GridSize gridSize;
+	private final GridOfSquares squares;
+	private final Mover mover;
 
-	public Controller(Square emptySquare, GridSize gridSize) {
-		this.emptySquare = emptySquare;
-		this.gridSize = gridSize;
+	public Controller(GridSize gridSize, Mover mover) {
 		this.view = new View(gridSize);
+		this.squares = view.getSquares();
+		this.mover = new Mover(squares);
 	}
 
 	public void initView() {
-
 	}
 
 	public void initController() {
-		List<Square> squares = view.getSquares();
-		squares.forEach(square -> square.addActionListener(e -> move(square)));
-
+		squares.setForAll(square -> square.addActionListener(e -> squareClicked(square)));
 	}
 
-	public void move(Square square) {
-		if (square.canMove(emptySquare)) {
-			emptySquare = square.switchSquareData(emptySquare);
-			gameProgress.update(emptySquare);
-		}
-		if (gameProgress.isComplete()) {
-			// TODO show congratulations
-		}
+	public void squareClicked(Square square) {
+		mover.moveSquare(square);
+		progressChecker.checkProgress(squares);
 	}
-
-
 }

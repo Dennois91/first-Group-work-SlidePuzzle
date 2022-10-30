@@ -13,7 +13,7 @@ public class View extends JFrame {
     JPanel centerPanel = new JPanel();
     JPanel southPanel = new JPanel();
 
-    //Game Buttons
+    //main.Game Buttons
     JButton nr1 = new JButtonPlus(1, "1");
     JButton nr2 = new JButtonPlus(2, "2");
     JButton nr3 = new JButtonPlus(3, "3");
@@ -37,7 +37,7 @@ public class View extends JFrame {
     JButton newGame = new JButton("New game");
     JButton cheatGame = new JButton("Ima cheater!");
 
-    //Game labels
+    //main.Game labels
     JLabel movesCounter = new JLabel(String.valueOf(0));
     JLabel messageLabel = new JLabel("Nr of moves: ");
 

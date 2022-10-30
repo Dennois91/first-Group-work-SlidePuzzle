@@ -1,21 +1,40 @@
 package models;
 
-public class Mover {
-	private final GridOfSquares squares;
+import java.util.List;
+import java.util.function.Predicate;
 
-	public Mover(GridOfSquares squares) {
-		this.squares = squares;
+public class Mover {
+	private final Grid<Square> grid;
+
+	public Mover(Grid<Square> grid) {
+		this.grid = grid;
 	}
 
 	public void moveSquare(Square square) {
-		if (canMove(square)) {
-			squares.swapSquares(square, squares.getEmptySquare());
+		var clickedSquarePosition = getPosition(square.getText());
+		var emptySquarePosition = getPosition("");
+		if (canMove(clickedSquarePosition)) {
+			grid.swap(clickedSquarePosition, emptySquarePosition);
 		}
 	}
 
-	private boolean canMove(Square square) {
-		var adjacentSquares = squares.getAdjacentSquares(square);
-		return adjacentSquares.stream()
-				.anyMatch(adjacentSquare -> adjacentSquare.equals(squares.getEmptySquare()));
+	private Position getPosition(String text) {
+		Predicate<Square> textMatches = square1 -> square1.getText().equals(text);
+		return grid.findPosition(textMatches)
+				.orElseThrow(() -> new RuntimeException("A square with the text could not be found"));
+	}
+
+	private boolean canMove(Position position) {
+		var positionsThatCanMove = getPositionsThatCanMove();
+		return positionsThatCanMove.contains(position);
+	}
+
+	private List<Position> getPositionsThatCanMove() {
+		var emptySquarePosition = getPosition("");
+		var up = new Position(emptySquarePosition.getX(), emptySquarePosition.getY() + 1);
+		var down = new Position(emptySquarePosition.getX(), emptySquarePosition.getY() - 1);
+		var left = new Position(emptySquarePosition.getX() - 1, emptySquarePosition.getY());
+		var right = new Position(emptySquarePosition.getX() + 1, emptySquarePosition.getY());
+		return List.of(up, down, left, right);
 	}
 }

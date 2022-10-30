@@ -1,29 +1,40 @@
 package controller;
 
+import main.Game;
 import models.*;
 import view.View;
 
 public class Controller {
-	private final ProgressChecker progressChecker = new ProgressChecker();
+	private final ProgressChecker progressChecker;
 	private final View view;
-	private final GridOfSquares squares;
 	private final Mover mover;
 
-	public Controller(GridSize gridSize, Mover mover) {
-		this.view = new View(gridSize);
-		this.squares = view.getSquares();
-		this.mover = new Mover(squares);
+	public Controller(View view, ProgressChecker progressChecker, Mover mover) {
+		this.view = view;
+		this.mover = mover;
+		this.progressChecker = progressChecker;
 	}
 
 	public void initView() {
+
 	}
 
-	public void initController() {
-		squares.setForAll(square -> square.addActionListener(e -> squareClicked(square)));
+	public void initializeController() {
+		view.getGrid.forAll(square -> square.addActionListener(e -> squareClicked(square)));
+		view.getCheatButton().addActionListener(e -> cheatButtonClicked());
+		view.getNewGameButton().addActionListener(e -> NewGameButtonClicked());
+	}
+
+	private void cheatButtonClicked() {
+		Game.cheat().run();
+	}
+
+	private void NewGameButtonClicked() {
+		// TODO Create a new game
 	}
 
 	public void squareClicked(Square square) {
-		mover.moveSquare(square);
-		progressChecker.checkProgress(squares);
+		mover.moveSquare(grid,square);
+		progressChecker.checkProgress(grid);
 	}
 }

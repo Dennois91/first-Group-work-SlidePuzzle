@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Square extends JButton {
-	private Square(String s) {
+	public Square(String s) {
 		super(s);
 	}
 

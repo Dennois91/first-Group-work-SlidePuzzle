@@ -34,6 +34,7 @@ public class Game {
 
 	private static Game createGame(int columns, int rows) {
 		Grid<Square> grid = new Grid<>(new Square[columns][rows]);
+		createSqures(grid);
 		initializeGridValues(grid);
 		View view = new View(grid);
 		ProgressChecker progressChecker = new ProgressChecker(grid);
@@ -47,12 +48,21 @@ public class Game {
 	}
 
 	private static void initializeGridValues(Grid<Square> grid) {
+
 		var positions = grid.getAllPositions();
 		var counter = new AtomicInteger(1);
 		positions.stream()
 				.limit(positions.size() - 1)
 				.map(grid::get)
-				.forEach(square -> square.setText(counter.toString()));
+				.forEach(square -> square.setText(String.valueOf(counter.getAndIncrement())));
+		grid.shuffle();
+	}
+
+	private static void createSqures(Grid<Square> grid) {
+
+		var positions = grid.getAllPositions();
+		//positions.forEach(System.out::println);
+		positions.forEach(position -> grid.set(position,new Square("")));
 		grid.shuffle();
 	}
 }

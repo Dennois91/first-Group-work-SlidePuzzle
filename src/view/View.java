@@ -1,11 +1,14 @@
 package view;
 
+import models.Grid;
+import models.Square;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class View extends JFrame {
+
+    Grid<Square> squareGrid;
 
 
     //Panel layouts
@@ -14,23 +17,6 @@ public class View extends JFrame {
     JPanel southPanel = new JPanel();
 
     //main.Game Buttons
-    JButton nr1 = new JButtonPlus(1, "1");
-    JButton nr2 = new JButtonPlus(2, "2");
-    JButton nr3 = new JButtonPlus(3, "3");
-    JButton nr4 = new JButtonPlus(4, "4");
-    JButton nr5 = new JButtonPlus(5, "5");
-    JButton nr6 = new JButtonPlus(6, "6");
-    JButton nr7 = new JButtonPlus(7, "7");
-    JButton nr8 = new JButtonPlus(8, "8");
-    JButton nr9 = new JButtonPlus(9, "9");
-    JButton nr10 = new JButtonPlus(10, "10");
-    JButton nr11 = new JButtonPlus(11, "11");
-    JButton nr12 = new JButtonPlus(12, "12");
-    JButton nr13 = new JButtonPlus(13, "13");
-    JButton nr14 = new JButtonPlus(14, "14");
-    JButton nr15 = new JButtonPlus(15, "15");
-    JButton blank = new JButtonPlus(16, " ");
-    List<JButton> buttonList;
 
 
     //Manipulate game buttons
@@ -41,7 +27,9 @@ public class View extends JFrame {
     JLabel movesCounter = new JLabel(String.valueOf(0));
     JLabel messageLabel = new JLabel("Nr of moves: ");
 
-    public View() {
+    public View(Grid<Square> squareGrid) {
+
+        this.squareGrid = squareGrid;
 
         setLayout(new BorderLayout());
         add(northPanel, BorderLayout.NORTH);
@@ -52,18 +40,11 @@ public class View extends JFrame {
         northPanel.add(movesCounter);
         northPanel.setBackground(Color.YELLOW);
 
-        centerPanel.setLayout(new GridLayout(4, 4));
+        centerPanel.setLayout(new GridLayout(squareGrid.getRow(), squareGrid.getCol()));
+        System.out.println(squareGrid.getRow());
+        System.out.println(squareGrid.getCol());
 
-        buttonList = bList();
-        Controller controller = controller.create(bList());
-
-        int temp = 1;
-        for (JButton button : buttonList) {
-            centerPanel.add(button);
-            int finalTemp = temp;
-            button.addActionListener((i) -> controller.moveButtonValue((JButtonPlus) button));
-            temp++;
-        }
+        squareGrid.forAll(square -> centerPanel.add(square));
 
         southPanel.add(newGame);
         southPanel.add(cheatGame);
@@ -75,24 +56,7 @@ public class View extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    protected List<JButton> bList() {
-        List<JButton> buttons = new ArrayList<>();
-        buttons.add(nr1);
-        buttons.add(nr2);
-        buttons.add(nr3);
-        buttons.add(nr4);
-        buttons.add(nr5);
-        buttons.add(nr6);
-        buttons.add(nr7);
-        buttons.add(nr8);
-        buttons.add(nr9);
-        buttons.add(nr10);
-        buttons.add(nr11);
-        buttons.add(nr12);
-        buttons.add(nr13);
-        buttons.add(nr14);
-        buttons.add(nr15);
-        buttons.add(blank);
-        return buttons;
+    public Grid<Square> getSquareGrid() {
+        return squareGrid;
     }
 }

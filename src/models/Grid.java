@@ -50,6 +50,7 @@ public class Grid<E> {
 				positions.add(new Position(x, y));
 			}
 		}
+		positions.forEach(System.out::println);
 		return positions;
 	}
 
@@ -57,5 +58,15 @@ public class Grid<E> {
 		getAllPositions().stream()
 				.map(this::get)
 				.forEach(action);
+
+
+	}
+
+	public int getCol (){
+		return elements[0].length;
+	}
+	public int getRow(){
+		return elements.length;
 	}
 }
+

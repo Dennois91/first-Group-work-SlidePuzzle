@@ -2,15 +2,12 @@ package view;
 
 import models.Grid;
 import models.Square;
-
 import javax.swing.*;
 import java.awt.*;
-
 
 public class View extends JFrame {
 
     Grid<Square> squareGrid;
-
 
 
     //Panel layouts
@@ -31,7 +28,7 @@ public class View extends JFrame {
 
     //main.Game labels
     JLabel movesCounter = new JLabel(String.valueOf(0));
-    JLabel messageLabel = new JLabel("Nr of moves: ");
+    JLabel messageLabel = new JLabel("Number of moves tried is:");
 
 
     public View(Grid<Square> squareGrid) {
@@ -54,7 +51,9 @@ public class View extends JFrame {
         levels.add(easy);
         levels.add(normal);
         levels.add(hard);
-
+        easy.setBackground(Color.yellow);
+        normal.setBackground(Color.yellow);
+        hard.setBackground(Color.yellow);
         easy.setActionCommand("easy");
         normal.setActionCommand("normal");
         hard.setActionCommand("hard");
@@ -74,45 +73,54 @@ public class View extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public JButton getCheatButton(){
+    public JButton getCheatButton() {
         return cheatGame;
     }
-    public JButton getNewGameButton(){
+
+    public JButton getNewGameButton() {
         return newGame;
     }
 
     public JRadioButton getEasy() {
         return easy;
     }
-    public JRadioButton getNormal(){
+
+    public JRadioButton getNormal() {
         return normal;
     }
-    public JRadioButton getHard(){
+
+    public JRadioButton getHard() {
         return hard;
     }
 
-    public void setEasy(JRadioButton easy) {
-        this.easy = easy;
+    public void setMessageLabelText(String text) {
+        messageLabel.setText(text);
     }
 
-    public void setNormal(JRadioButton normal) {
-        this.normal = normal;
+    public void setMovesCounter(int counter) {
+        movesCounter.setText(String.valueOf(counter));
     }
 
-    public void setHard(JRadioButton hard) {
-        this.hard = hard;
-    }
-
-    public void updatePanel (){
-     centerPanel.removeAll();
-     squareGrid.forAll(square -> centerPanel.add(square));
-     revalidate();
-     repaint();
+    public void updatePanel() {
+        centerPanel.removeAll();
+        squareGrid.forAll(square -> centerPanel.add(square));
+        revalidate();
+        repaint();
     }
 
     public Grid<Square> getSquareGrid() {
         return squareGrid;
     }
 
+    public void setEasy() {
+        easy.setSelected(true);
+    }
 
+    public void setNormal() {
+        normal.setSelected(true);
+    }
+
+    public void setHard() {
+        hard.setSelected(true);
+    }
 }

@@ -3,7 +3,6 @@ package controller;
 import main.Game;
 import models.*;
 import view.View;
-
 import java.awt.event.ActionEvent;
 import java.util.Objects;
 
@@ -12,6 +11,7 @@ public class Controller {
     private final View view;
     private final Mover mover;
     private String difficulty = "normal";
+    private int counter=1;
 
     public Controller(View view, ProgressChecker progressChecker, Mover mover) {
         this.view = view;
@@ -52,11 +52,12 @@ public class Controller {
         difficulty = (e.getActionCommand());
     }
 
-
     public void squareClicked(Square square) {
         mover.moveSquare(square);
-        progressChecker.checkProgress();
+        view.setMovesCounter(counter);
+        counter++;
+        if (progressChecker.checkProgress())
+            view.setMessageLabelText("Congratulations. You win!");
         view.updatePanel();
-
     }
 }

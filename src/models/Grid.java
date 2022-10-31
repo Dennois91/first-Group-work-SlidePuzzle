@@ -45,12 +45,12 @@ public class Grid<E> {
 
 	public List<Position> getAllPositions() {
 		List<Position> positions = new ArrayList<>();
-		for (int y = 1; y < (elements.length - 1); y++) {
-			for (int x = 1; x < (elements[0].length - 1); x++) {
+		for (int y = 1; y < (elements.length +1); y++) {
+			for (int x = 1; x < (elements[0].length +1); x++) {
 				positions.add(new Position(x, y));
 			}
 		}
-		positions.forEach(System.out::println);
+
 		return positions;
 	}
 

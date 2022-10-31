@@ -11,6 +11,7 @@ public class ProgressChecker {
 
 	public void checkProgress() {
 		if (squaresAreInOrder()) {
+			System.out.println("Grattis big brain!");
 			// TODO Congratulate
 		}
 	}
@@ -21,6 +22,7 @@ public class ProgressChecker {
 		return positions.stream()
 				.limit(positions.size() - 1)
 				.map(grid::get)
-				.allMatch(square -> Integer.parseInt(square.getText()) == counter.getAndIncrement());
+				.allMatch(square -> Integer.parseInt(square.getText().equals("")
+						? "0" :square.getText()) == counter.getAndIncrement());
 	}
 }

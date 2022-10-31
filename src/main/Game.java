@@ -29,7 +29,7 @@ public class Game {
 	}
 
 	public static Game cheat() {
-		return createGame(2, 1);
+		return createGame(2, 2);
 	}
 
 	private static Game createGame(int columns, int rows) {
@@ -61,7 +61,6 @@ public class Game {
 	private static void createSqures(Grid<Square> grid) {
 
 		var positions = grid.getAllPositions();
-		//positions.forEach(System.out::println);
 		positions.forEach(position -> grid.set(position,new Square("")));
 		grid.shuffle();
 	}

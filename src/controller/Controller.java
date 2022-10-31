@@ -21,8 +21,8 @@ public class Controller {
 
 	public void initializeController() {
 		view.getSquareGrid().forAll(square -> square.addActionListener(e -> squareClicked(square)));
-	//	view.getCheatButton().addActionListener(e -> cheatButtonClicked());
-	//	view.getNewGameButton().addActionListener(e -> NewGameButtonClicked());
+		view.getCheatButton().addActionListener(e -> cheatButtonClicked());
+	    view.getNewGameButton().addActionListener(e -> NewGameButtonClicked());
 	}
 
 	private void cheatButtonClicked() {
@@ -30,11 +30,15 @@ public class Controller {
 	}
 
 	private void NewGameButtonClicked() {
+		view.dispose();
+		Game.normal().run();
 		// TODO Create a new game
 	}
 
 	public void squareClicked(Square square) {
 		mover.moveSquare(square);
 		progressChecker.checkProgress();
+		view.updatePanel();
+
 	}
 }

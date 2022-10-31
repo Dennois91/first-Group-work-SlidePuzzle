@@ -46,6 +46,8 @@ public class View extends JFrame {
 
         squareGrid.forAll(square -> centerPanel.add(square));
 
+
+
         southPanel.add(newGame);
         southPanel.add(cheatGame);
         southPanel.setBackground(Color.YELLOW);
@@ -54,6 +56,20 @@ public class View extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public JButton getCheatButton(){
+        return cheatGame;
+    }
+    public JButton getNewGameButton(){
+        return newGame;
+    }
+
+    public void updatePanel (){
+     centerPanel.removeAll();
+     squareGrid.forAll(square -> centerPanel.add(square));
+     revalidate();
+     repaint();
     }
 
     public Grid<Square> getSquareGrid() {

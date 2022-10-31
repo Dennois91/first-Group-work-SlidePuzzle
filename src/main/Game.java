@@ -17,7 +17,7 @@ public class Game {
 	}
 
 	public static Game easy() {
-		return createGame(2, 2);
+		return createGame(3, 3);
 	}
 
 	public static Game normal() {

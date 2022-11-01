@@ -1,10 +1,7 @@
 package main;
 
 import controller.Controller;
-import models.Grid;
-import models.Mover;
-import models.ProgressChecker;
-import models.Square;
+import models.*;
 import view.View;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,7 +32,8 @@ public class Game {
 	private static Game createGame(int columns, int rows) {
 		Grid<Square> grid = new Grid<>(new Square[columns][rows]);
 		createSquares(grid);
-		initializeGridValues(grid);
+		SolvabilityChecker solvabilityChecker = new SolvabilityChecker(grid,new InversionCounter());
+		initializeGridValues(grid, solvabilityChecker);
 		View view = new View(grid);
 		ProgressChecker progressChecker = new ProgressChecker(grid);
 		Mover mover = new Mover(grid);
@@ -47,15 +45,22 @@ public class Game {
 		controller.initializeController();
 	}
 
-	private static void initializeGridValues(Grid<Square> grid) {
-
+	private static void initializeGridValues(Grid<Square> grid, SolvabilityChecker solvabilityChecker) {
 		var positions = grid.getAllPositions();
 		var counter = new AtomicInteger(1);
 		positions.stream()
 				.limit(positions.size() - 1)
 				.map(grid::get)
 				.forEach(square -> square.setText(String.valueOf(counter.getAndIncrement())));
+
+		shuffleGridValues(grid, solvabilityChecker);
+	}
+
+	private static void shuffleGridValues(Grid<Square> grid, SolvabilityChecker solvabilityChecker) {
 		grid.shuffle();
+		while (!solvabilityChecker.isSolvable()) {
+			grid.shuffle();
+		}
 	}
 
 	private static void createSquares(Grid<Square> grid) {

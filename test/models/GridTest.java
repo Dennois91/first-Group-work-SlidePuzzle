@@ -51,13 +51,13 @@ class GridTest {
     }
     @Test
     void getCol(){
-        assert grid.getCol()==2;
-        assert grid.getCol()!=1;
+        assert grid.getCols()==2;
+        assert grid.getCols()!=1;
     }
     @Test
     void getRow(){
-        assert grid.getRow()==2;
-        assert grid.getRow()!=1;
+        assert grid.getRows()==2;
+        assert grid.getRows()!=1;
     }
 
 }

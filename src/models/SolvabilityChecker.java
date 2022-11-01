@@ -16,32 +16,12 @@ public class SolvabilityChecker {
 
 	public boolean isSolvable() {
 		Predicate<Integer> isOdd = n -> (n & 1) != 0;
-		var columnCountIsOdd = isOdd.test(grid.getCols());
-		var inversionCountIsOdd = isOdd.test(inversionCounter.count(getNumbersInGrid()));
-		var emptySquareIsOnInEvenRow = isOdd.test(getBlankSquareDistanceFromBottom());
+		var initialStateInversionCount = inversionCounter.count(getNumbersInGrid());
+		var goalStateInversionCount = 0;
+		var blankSquareDistanceFromBottom = getBlankSquareDistanceFromBottom();
 
-		// If N is odd, then puzzle instance is solvable if number of inversions is even in the input state.
-		if (columnCountIsOdd && !inversionCountIsOdd) {
-			return true;
-		}
+		return (isOdd.test(initialStateInversionCount+blankSquareDistanceFromBottom) == isOdd.test(goalStateInversionCount));
 
-		// If N is even, puzzle instance is solvable if
-		if (!columnCountIsOdd) {
-
-			/*the blank is on an even row counting from the bottom (second-last, fourth-last, etc.) and number of
-			inversions
-			is odd.*/
-			if (emptySquareIsOnInEvenRow && inversionCountIsOdd) {
-				return true;
-			}
-
-			/*the blank is on an odd row counting from the bottom (last, third-last, fifth-last, etc.) and number of
-			inversions is even.*/
-			return !emptySquareIsOnInEvenRow && !inversionCountIsOdd;
-		}
-
-		/*For all other cases, the puzzle instance is not solvable.*/
-		return false;
 	}
 
 	private int getBlankSquareDistanceFromBottom() {

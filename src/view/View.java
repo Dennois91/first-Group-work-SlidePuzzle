@@ -20,7 +20,7 @@ public class View extends JFrame {
 
     //Manipulate game buttons
     JButton newGame = new JButton("New game");
-    JButton cheatGame = new JButton("Ima cheater!");
+    JButton cheatGame = new JButton("Cheat mode");
     JRadioButton easy = new JRadioButton("Easy");
     JRadioButton normal = new JRadioButton("Normal");
     JRadioButton hard = new JRadioButton("Hard");
@@ -100,6 +100,10 @@ public class View extends JFrame {
     public void setMovesCounter(int counter) {
         movesCounter.setText(String.valueOf(counter));
     }
+    public void setMovesCounter(String message) {
+        movesCounter.setText(message);
+    }
+
 
     public void updatePanel() {
         centerPanel.removeAll();

@@ -10,7 +10,7 @@ public class Controller {
     private final ProgressChecker progressChecker;
     private final View view;
     private final Mover mover;
-    private String difficulty = "normal";
+    private String difficulty = null;
     private int counter=1;
 
     public Controller(View view, ProgressChecker progressChecker, Mover mover) {
@@ -36,14 +36,21 @@ public class Controller {
     }
 
     private void NewGameButtonClicked() {
-        view.dispose();
+
+        if (Objects.equals(difficulty, null)){
+            view.setMessageLabelText("Choose difficulty first!");
+            view.setMovesCounter("");
+        }
         if (Objects.equals(difficulty, "easy")) {
+            view.dispose();
             Game.easy().run();
         }
         if (Objects.equals(difficulty, "normal")) {
+            view.dispose();
             Game.normal().run();
         }
         if (Objects.equals(difficulty, "hard")) {
+            view.dispose();
             Game.hard().run();
         }
     }

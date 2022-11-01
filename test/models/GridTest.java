@@ -1,11 +1,8 @@
 package models;
 
-
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 class GridTest {
@@ -49,15 +46,17 @@ class GridTest {
         assert positions.get(3).equals(d);
 
     }
+
     @Test
-    void getCol(){
-        assert grid.getCols()==2;
-        assert grid.getCols()!=1;
+    void getCol() {
+        assert grid.getCols() == 2;
+        assert grid.getCols() != 1;
     }
+
     @Test
-    void getRow(){
-        assert grid.getRows()==2;
-        assert grid.getRows()!=1;
+    void getRow() {
+        assert grid.getRows() == 2;
+        assert grid.getRows() != 1;
     }
 
 }

@@ -116,15 +116,4 @@ public class View extends JFrame {
         return squareGrid;
     }
 
-    public void setEasy() {
-        easy.setSelected(true);
-    }
-
-    public void setNormal() {
-        normal.setSelected(true);
-    }
-
-    public void setHard() {
-        hard.setSelected(true);
-    }
 }

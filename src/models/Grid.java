@@ -38,6 +38,9 @@ public class Grid<E> {
 		var currentPositions = getAllPositions();
 		var newPositions = new ArrayList<>(currentPositions);
 		Collections.shuffle(newPositions);
+		if(currentPositions.equals(newPositions)){
+			Collections.shuffle(newPositions);
+		}
 		for (int i = 0; i < currentPositions.size(); i++) {
 			swap(currentPositions.get(i), newPositions.get(i));
 		}

@@ -16,11 +16,8 @@ class GridTest {
     Position c = new Position(2, 1);
     Position d = new Position(2, 2);
 
-    List<Position> positionList = new ArrayList<>();
+    List<Position> positions = new ArrayList<>();
 
-    @Test
-    void findPosition() {
-    }
 
     @Test
     void swap() {
@@ -38,31 +35,29 @@ class GridTest {
     }
 
     @Test
-    void shuffle() {
-        positionList.add(a);
-        positionList.add(b);
-        positionList.add(c);
-
-        for (int i = 0; i < 200; i++) {
-            var currentPositions = positionList;
-            var newPositions = new ArrayList<>(currentPositions);
-
-            assert currentPositions.equals(newPositions);
-
-            Collections.shuffle(newPositions);
-            if (currentPositions.equals(newPositions)) {
-                Collections.shuffle(newPositions);
-                continue;
-            }
-            assert !currentPositions.equals(newPositions);
-        }
-    }
-
-    @Test
     void getAllPositions() {
+        grid.set(a, new Square("1"));
+        grid.set(b, new Square("2"));
+        grid.set(c, new Square("3"));
+        grid.set(d, new Square("4"));
+
+        positions = grid.getAllPositions();
+
+        assert !positions.isEmpty();
+        assert positions.size() == 4;
+        assert positions.get(0).equals(a);
+        assert positions.get(3).equals(d);
+
+    }
+    @Test
+    void getCol(){
+        assert grid.getCol()==2;
+        assert grid.getCol()!=1;
+    }
+    @Test
+    void getRow(){
+        assert grid.getRow()==2;
+        assert grid.getRow()!=1;
     }
 
-    @Test
-    void forAll() {
-    }
 }

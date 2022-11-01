@@ -56,10 +56,7 @@ public class SolvabilityChecker {
 	private List<Integer> getNumbersInGrid() {
 		return grid.stream()
 				.map(AbstractButton::getText)
-				.map(text -> text.equals("") ? "0" : text)
+				.filter(text -> !text.equals(""))
 				.map(Integer::parseInt).toList();
 	}
 }
-
-
-

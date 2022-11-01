@@ -19,7 +19,7 @@ public class Mover {
 	}
 
 	private Position getPosition(String text) {
-		Predicate<Square> textMatches = square1 -> square1.getText().equals(text);
+		Predicate<Square> textMatches = square -> square.getText().equals(text);
 		return grid.findPosition(textMatches)
 				.orElseThrow(() -> new RuntimeException("A square with the text could not be found"));
 	}

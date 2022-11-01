@@ -1,12 +1,9 @@
 package models;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class Grid<E> {
 	private final E[][] elements;
@@ -62,11 +59,15 @@ public class Grid<E> {
 
 	}
 
-	public int getCol (){
+	public int getCols(){
 		return elements[0].length;
 	}
-	public int getRow(){
+	public int getRows(){
 		return elements.length;
+	}
+
+	public Stream<E> stream() {
+		return Arrays.stream(elements).flatMap(Arrays::stream);
 	}
 }
 

@@ -3,6 +3,7 @@ package controller;
 import main.Game;
 import models.*;
 import view.View;
+
 import java.awt.event.ActionEvent;
 import java.util.Objects;
 
@@ -10,8 +11,8 @@ public class Controller {
     private final ProgressChecker progressChecker;
     private final View view;
     private final Mover mover;
-    private String difficulty = "normal";
-    private int counter=1;
+    private String difficulty = null;
+    private int counter = 1;
 
     public Controller(View view, ProgressChecker progressChecker, Mover mover) {
         this.view = view;
@@ -22,8 +23,11 @@ public class Controller {
 
     public void initializeController() {
         view.getSquareGrid().forAll(square -> square.addActionListener(e -> squareClicked(square)));
+        view.getSquareGrid().forAll(square -> square.addMouseListener(new MouseListen(square)));
         view.getCheatButton().addActionListener(e -> cheatButtonClicked());
+        view.getCheatButton().addMouseListener(new MouseListen(view.getCheatButton()));
         view.getNewGameButton().addActionListener(e -> NewGameButtonClicked());
+        view.getNewGameButton().addMouseListener(new MouseListen(view.getNewGameButton()));
         view.getEasy().addActionListener(this::Difficulty);
         view.getNormal().addActionListener(this::Difficulty);
         view.getHard().addActionListener(this::Difficulty);
@@ -36,14 +40,21 @@ public class Controller {
     }
 
     private void NewGameButtonClicked() {
-        view.dispose();
+
+        if (Objects.equals(difficulty, null)) {
+            view.setMessageLabelText("Choose difficulty first!");
+            view.setMovesCounter("");
+        }
         if (Objects.equals(difficulty, "easy")) {
+            view.dispose();
             Game.easy().run();
         }
         if (Objects.equals(difficulty, "normal")) {
+            view.dispose();
             Game.normal().run();
         }
         if (Objects.equals(difficulty, "hard")) {
+            view.dispose();
             Game.hard().run();
         }
     }

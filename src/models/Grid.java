@@ -36,12 +36,9 @@ public class Grid<E> {
     public void shuffle() {
         var currentPositions = getAllPositions();
         var newPositions = new ArrayList<>(currentPositions);
-        Collections.shuffle(newPositions);
-
         while (currentPositions.equals(newPositions)) {
             Collections.shuffle(newPositions);
         }
-
         for (int i = 0; i < currentPositions.size(); i++) {
             swap(currentPositions.get(i), newPositions.get(i));
         }

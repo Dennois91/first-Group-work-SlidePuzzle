@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class GridTest {
@@ -14,6 +15,8 @@ class GridTest {
     Position b = new Position(1, 2);
     Position c = new Position(2, 1);
     Position d = new Position(2, 2);
+
+    List<Position> positionList = new ArrayList<>();
 
     @Test
     void findPosition() {
@@ -36,6 +39,23 @@ class GridTest {
 
     @Test
     void shuffle() {
+        positionList.add(a);
+        positionList.add(b);
+        positionList.add(c);
+
+        for (int i = 0; i < 200; i++) {
+            var currentPositions = positionList;
+            var newPositions = new ArrayList<>(currentPositions);
+
+            assert currentPositions.equals(newPositions);
+
+            Collections.shuffle(newPositions);
+            if (currentPositions.equals(newPositions)) {
+                Collections.shuffle(newPositions);
+                continue;
+            }
+            assert !currentPositions.equals(newPositions);
+        }
     }
 
     @Test

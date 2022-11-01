@@ -44,7 +44,7 @@ public class View extends JFrame {
         northPanel.add(movesCounter);
         northPanel.setBackground(Color.YELLOW);
 
-        centerPanel.setLayout(new GridLayout(squareGrid.getRow(), squareGrid.getCol()));
+        centerPanel.setLayout(new GridLayout(squareGrid.getRows(), squareGrid.getCols()));
 
         squareGrid.forAll(square -> centerPanel.add(square));
 
